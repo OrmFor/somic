@@ -1,0 +1,25 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.yinmimoney.web</groupId>
+    <artifactId>p2pnew-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <artifactId>p2pnew-app</artifactId>
+  <name>p2pnew-app</name>
+  <packaging>war</packaging>
+  <dependencies>
+    <dependency>
+      <groupId>com.yinmimoney.web</groupId>
+      <artifactId>p2pnew-core</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+		<groupId>com.yinmimoney.utils</groupId>
+		<artifactId>yinmimoney-utils-jms</artifactId>
+		<version>1.0.1-SNAPSHOT</version>
+	</dependency>
+  </dependencies>
+  <version>3.0</version>
+</project>

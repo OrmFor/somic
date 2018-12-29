@@ -1,0 +1,1060 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yinmimoney.web.p2pnew.dao.BorrowApplyMapper" >
+  <resultMap id="BaseResultMap" type="com.yinmimoney.web.p2pnew.pojo.BorrowApply" extends="associationMap">
+	<id column="id" property="id" />
+	<result column="user_code" property="userCode" />
+	<result column="apply_no" property="applyNo" />
+	<result column="car_type" property="carType" />
+	<result column="car_brand" property="carBrand" />
+	<result column="car_model" property="carModel" />
+	<result column="car_vin_no" property="carVinNo" />
+	<result column="insurance" property="insurance" />
+	<result column="car_price" property="carPrice" />
+	<result column="evaluate_price" property="evaluatePrice" />
+	<result column="loan_bank" property="loanBank" />
+	<result column="loan_type" property="loanType" />
+	<result column="loan_money" property="loanMoney" />
+	<result column="loan_scale" property="loanScale" />
+	<result column="first_payment_money" property="firstPaymentMoney" />
+	<result column="first_payment_scale" property="firstPaymentScale" />
+	<result column="loan_time" property="loanTime" />
+	<result column="period_repayment_money" property="periodRepaymentMoney" />
+	<result column="loan_apr" property="loanApr" />
+	<result column="all_repayment_money" property="allRepaymentMoney" />
+	<result column="first_repayment_money" property="firstRepaymentMoney" />
+	<result column="actual_repayment_money" property="actualRepaymentMoney" />
+	<result column="status" property="status" />
+	<result column="operate_establish" property="operateEstablish" />
+	<result column="establish_time" property="establishTime" />
+	<result column="trial_remark" property="trialRemark" />
+	<result column="trial_operator" property="trialOperator" />
+	<result column="trial_time" property="trialTime" />
+	<result column="review_operator" property="reviewOperator" />
+	<result column="review_remark" property="reviewRemark" />
+	<result column="review_time" property="reviewTime" />
+	<result column="final_remark" property="finalRemark" />
+	<result column="operate_review2" property="operateReview2" />
+	<result column="final_time" property="finalTime" />
+	<result column="transfer_remark" property="transferRemark" />
+	<result column="operate_review3" property="operateReview3" />
+	<result column="transfer_time" property="transferTime" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+		`id`
+		,`user_code`
+		,`apply_no`
+		,`car_type`
+		,`car_brand`
+		,`car_model`
+		,`car_vin_no`
+		,`insurance`
+		,`car_price`
+		,`evaluate_price`
+		,`loan_bank`
+		,`loan_type`
+		,`loan_money`
+		,`loan_scale`
+		,`first_payment_money`
+		,`first_payment_scale`
+		,`loan_time`
+		,`period_repayment_money`
+		,`loan_apr`
+		,`all_repayment_money`
+		,`first_repayment_money`
+		,`actual_repayment_money`
+		,`status`
+		,`operate_establish`
+		,`establish_time`
+		,`trial_remark`
+		,`trial_operator`
+		,`trial_time`
+		,`review_operator`
+		,`review_remark`
+		,`review_time`
+		,`final_remark`
+		,`operate_review2`
+		,`final_time`
+		,`transfer_remark`
+		,`operate_review3`
+		,`transfer_time`
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    SELECT 
+    <include refid="Base_Column_List" />
+    FROM `borrow_apply`
+    WHERE `id` = #{id}
+  </select>
+  <select id="getByCondition" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    SELECT 
+    <include refid="Base_Column_List" />
+    FROM `borrow_apply`
+    <include refid="map_params_where_condition" />
+    <if test="orderBy == null" >
+      ORDER BY `id` DESC
+    </if>
+    <if test="orderBy != null and orderBy != 'no'" >
+      ORDER BY ${orderBy}
+    </if>
+	LIMIT 1
+  </select>
+  <select id="aggregate" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT ${aggregate_sql} FROM `borrow_apply`
+    <include refid="map_params_where_condition" />
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    DELETE FROM `borrow_apply`
+    WHERE `id` = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.yinmimoney.web.p2pnew.pojo.BorrowApply" >
+    INSERT INTO `borrow_apply` (
+	  `id`
+	  ,`user_code`
+	  ,`apply_no`
+	  ,`car_type`
+	  ,`car_brand`
+	  ,`car_model`
+	  ,`car_vin_no`
+	  ,`insurance`
+	  ,`car_price`
+	  ,`evaluate_price`
+	  ,`loan_bank`
+	  ,`loan_type`
+	  ,`loan_money`
+	  ,`loan_scale`
+	  ,`first_payment_money`
+	  ,`first_payment_scale`
+	  ,`loan_time`
+	  ,`period_repayment_money`
+	  ,`loan_apr`
+	  ,`all_repayment_money`
+	  ,`first_repayment_money`
+	  ,`actual_repayment_money`
+	  ,`status`
+	  ,`operate_establish`
+	  ,`establish_time`
+	  ,`trial_remark`
+	  ,`trial_operator`
+	  ,`trial_time`
+	  ,`review_operator`
+	  ,`review_remark`
+	  ,`review_time`
+	  ,`final_remark`
+	  ,`operate_review2`
+	  ,`final_time`
+	  ,`transfer_remark`
+	  ,`operate_review3`
+	  ,`transfer_time`
+      )
+    VALUES (
+		  
+		  #{id}
+		  ,
+		  #{userCode}
+		  ,
+		  #{applyNo}
+		  ,
+		  #{carType}
+		  ,
+		  #{carBrand}
+		  ,
+		  #{carModel}
+		  ,
+		  #{carVinNo}
+		  ,
+		  #{insurance}
+		  ,
+		  #{carPrice}
+		  ,
+		  #{evaluatePrice}
+		  ,
+		  #{loanBank}
+		  ,
+		  #{loanType}
+		  ,
+		  #{loanMoney}
+		  ,
+		  #{loanScale}
+		  ,
+		  #{firstPaymentMoney}
+		  ,
+		  #{firstPaymentScale}
+		  ,
+		  #{loanTime}
+		  ,
+		  #{periodRepaymentMoney}
+		  ,
+		  #{loanApr}
+		  ,
+		  #{allRepaymentMoney}
+		  ,
+		  #{firstRepaymentMoney}
+		  ,
+		  #{actualRepaymentMoney}
+		  ,
+		  #{status}
+		  ,
+		  #{operateEstablish}
+		  ,
+		  <if test="establishTime != null" >
+			#{establishTime}
+      </if>
+      <if test="establishTime == null" >
+      NOW()
+		  </if>
+		  ,
+		  #{trialRemark}
+		  ,
+		  #{trialOperator}
+		  ,
+		  #{trialTime}
+		  ,
+		  #{reviewOperator}
+		  ,
+		  #{reviewRemark}
+		  ,
+		  #{reviewTime}
+		  ,
+		  #{finalRemark}
+		  ,
+		  #{operateReview2}
+		  ,
+		  #{finalTime}
+		  ,
+		  #{transferRemark}
+		  ,
+		  #{operateReview3}
+		  ,
+		  #{transferTime}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yinmimoney.web.p2pnew.pojo.BorrowApply" >
+    INSERT INTO `borrow_apply`
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+		  <if test="id != null" >
+			`id`,
+		  </if>
+		  <if test="userCode != null" >
+			`user_code`,
+		  </if>
+		  <if test="applyNo != null" >
+			`apply_no`,
+		  </if>
+		  <if test="carType != null" >
+			`car_type`,
+		  </if>
+		  <if test="carBrand != null" >
+			`car_brand`,
+		  </if>
+		  <if test="carModel != null" >
+			`car_model`,
+		  </if>
+		  <if test="carVinNo != null" >
+			`car_vin_no`,
+		  </if>
+		  <if test="insurance != null" >
+			`insurance`,
+		  </if>
+		  <if test="carPrice != null" >
+			`car_price`,
+		  </if>
+		  <if test="evaluatePrice != null" >
+			`evaluate_price`,
+		  </if>
+		  <if test="loanBank != null" >
+			`loan_bank`,
+		  </if>
+		  <if test="loanType != null" >
+			`loan_type`,
+		  </if>
+		  <if test="loanMoney != null" >
+			`loan_money`,
+		  </if>
+		  <if test="loanScale != null" >
+			`loan_scale`,
+		  </if>
+		  <if test="firstPaymentMoney != null" >
+			`first_payment_money`,
+		  </if>
+		  <if test="firstPaymentScale != null" >
+			`first_payment_scale`,
+		  </if>
+		  <if test="loanTime != null" >
+			`loan_time`,
+		  </if>
+		  <if test="periodRepaymentMoney != null" >
+			`period_repayment_money`,
+		  </if>
+		  <if test="loanApr != null" >
+			`loan_apr`,
+		  </if>
+		  <if test="allRepaymentMoney != null" >
+			`all_repayment_money`,
+		  </if>
+		  <if test="firstRepaymentMoney != null" >
+			`first_repayment_money`,
+		  </if>
+		  <if test="actualRepaymentMoney != null" >
+			`actual_repayment_money`,
+		  </if>
+		  <if test="status != null" >
+			`status`,
+		  </if>
+		  <if test="operateEstablish != null" >
+			`operate_establish`,
+		  </if>
+			`establish_time`,
+		  <if test="trialRemark != null" >
+			`trial_remark`,
+		  </if>
+		  <if test="trialOperator != null" >
+			`trial_operator`,
+		  </if>
+		  <if test="trialTime != null" >
+			`trial_time`,
+		  </if>
+		  <if test="reviewOperator != null" >
+			`review_operator`,
+		  </if>
+		  <if test="reviewRemark != null" >
+			`review_remark`,
+		  </if>
+		  <if test="reviewTime != null" >
+			`review_time`,
+		  </if>
+		  <if test="finalRemark != null" >
+			`final_remark`,
+		  </if>
+		  <if test="operateReview2 != null" >
+			`operate_review2`,
+		  </if>
+		  <if test="finalTime != null" >
+			`final_time`,
+		  </if>
+		  <if test="transferRemark != null" >
+			`transfer_remark`,
+		  </if>
+		  <if test="operateReview3 != null" >
+			`operate_review3`,
+		  </if>
+		  <if test="transferTime != null" >
+			`transfer_time`,
+		  </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+		  <if test="id != null" >
+			#{id},
+		  </if>
+		  <if test="userCode != null" >
+			#{userCode},
+		  </if>
+		  <if test="applyNo != null" >
+			#{applyNo},
+		  </if>
+		  <if test="carType != null" >
+			#{carType},
+		  </if>
+		  <if test="carBrand != null" >
+			#{carBrand},
+		  </if>
+		  <if test="carModel != null" >
+			#{carModel},
+		  </if>
+		  <if test="carVinNo != null" >
+			#{carVinNo},
+		  </if>
+		  <if test="insurance != null" >
+			#{insurance},
+		  </if>
+		  <if test="carPrice != null" >
+			#{carPrice},
+		  </if>
+		  <if test="evaluatePrice != null" >
+			#{evaluatePrice},
+		  </if>
+		  <if test="loanBank != null" >
+			#{loanBank},
+		  </if>
+		  <if test="loanType != null" >
+			#{loanType},
+		  </if>
+		  <if test="loanMoney != null" >
+			#{loanMoney},
+		  </if>
+		  <if test="loanScale != null" >
+			#{loanScale},
+		  </if>
+		  <if test="firstPaymentMoney != null" >
+			#{firstPaymentMoney},
+		  </if>
+		  <if test="firstPaymentScale != null" >
+			#{firstPaymentScale},
+		  </if>
+		  <if test="loanTime != null" >
+			#{loanTime},
+		  </if>
+		  <if test="periodRepaymentMoney != null" >
+			#{periodRepaymentMoney},
+		  </if>
+		  <if test="loanApr != null" >
+			#{loanApr},
+		  </if>
+		  <if test="allRepaymentMoney != null" >
+			#{allRepaymentMoney},
+		  </if>
+		  <if test="firstRepaymentMoney != null" >
+			#{firstRepaymentMoney},
+		  </if>
+		  <if test="actualRepaymentMoney != null" >
+			#{actualRepaymentMoney},
+		  </if>
+		  <if test="status != null" >
+			#{status},
+		  </if>
+		  <if test="operateEstablish != null" >
+			#{operateEstablish},
+		  </if>
+		  <if test="establishTime != null" >
+			#{establishTime},
+      </if>
+      <if test="establishTime == null" >
+      NOW(),
+		  </if>
+		  <if test="trialRemark != null" >
+			#{trialRemark},
+		  </if>
+		  <if test="trialOperator != null" >
+			#{trialOperator},
+		  </if>
+		  <if test="trialTime != null" >
+			#{trialTime},
+		  </if>
+		  <if test="reviewOperator != null" >
+			#{reviewOperator},
+		  </if>
+		  <if test="reviewRemark != null" >
+			#{reviewRemark},
+		  </if>
+		  <if test="reviewTime != null" >
+			#{reviewTime},
+		  </if>
+		  <if test="finalRemark != null" >
+			#{finalRemark},
+		  </if>
+		  <if test="operateReview2 != null" >
+			#{operateReview2},
+		  </if>
+		  <if test="finalTime != null" >
+			#{finalTime},
+		  </if>
+		  <if test="transferRemark != null" >
+			#{transferRemark},
+		  </if>
+		  <if test="operateReview3 != null" >
+			#{operateReview3},
+		  </if>
+		  <if test="transferTime != null" >
+			#{transferTime},
+		  </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yinmimoney.web.p2pnew.pojo.BorrowApply" >
+    UPDATE `borrow_apply`
+    <set >
+	  <if test="id != null" >
+        `id` = #{id},
+      </if>
+	  <if test="userCode != null" >
+        `user_code` = #{userCode},
+      </if>
+	  <if test="applyNo != null" >
+        `apply_no` = #{applyNo},
+      </if>
+	  <if test="carType != null" >
+        `car_type` = #{carType},
+      </if>
+	  <if test="carBrand != null" >
+        `car_brand` = #{carBrand},
+      </if>
+	  <if test="carModel != null" >
+        `car_model` = #{carModel},
+      </if>
+	  <if test="carVinNo != null" >
+        `car_vin_no` = #{carVinNo},
+      </if>
+	  <if test="insurance != null" >
+        `insurance` = #{insurance},
+      </if>
+	  <if test="carPrice != null" >
+        `car_price` = #{carPrice},
+      </if>
+	  <if test="evaluatePrice != null" >
+        `evaluate_price` = #{evaluatePrice},
+      </if>
+	  <if test="loanBank != null" >
+        `loan_bank` = #{loanBank},
+      </if>
+	  <if test="loanType != null" >
+        `loan_type` = #{loanType},
+      </if>
+	  <if test="loanMoney != null" >
+        `loan_money` = #{loanMoney},
+      </if>
+	  <if test="loanScale != null" >
+        `loan_scale` = #{loanScale},
+      </if>
+	  <if test="firstPaymentMoney != null" >
+        `first_payment_money` = #{firstPaymentMoney},
+      </if>
+	  <if test="firstPaymentScale != null" >
+        `first_payment_scale` = #{firstPaymentScale},
+      </if>
+	  <if test="loanTime != null" >
+        `loan_time` = #{loanTime},
+      </if>
+	  <if test="periodRepaymentMoney != null" >
+        `period_repayment_money` = #{periodRepaymentMoney},
+      </if>
+	  <if test="loanApr != null" >
+        `loan_apr` = #{loanApr},
+      </if>
+	  <if test="allRepaymentMoney != null" >
+        `all_repayment_money` = #{allRepaymentMoney},
+      </if>
+	  <if test="firstRepaymentMoney != null" >
+        `first_repayment_money` = #{firstRepaymentMoney},
+      </if>
+	  <if test="actualRepaymentMoney != null" >
+        `actual_repayment_money` = #{actualRepaymentMoney},
+      </if>
+	  <if test="status != null" >
+        `status` = #{status},
+      </if>
+	  <if test="operateEstablish != null" >
+        `operate_establish` = #{operateEstablish},
+      </if>
+	  <if test="establishTime != null" >
+        `establish_time` = #{establishTime},
+      </if>
+	  <if test="trialRemark != null" >
+        `trial_remark` = #{trialRemark},
+      </if>
+	  <if test="trialOperator != null" >
+        `trial_operator` = #{trialOperator},
+      </if>
+	  <if test="trialTime != null" >
+        `trial_time` = #{trialTime},
+      </if>
+	  <if test="reviewOperator != null" >
+        `review_operator` = #{reviewOperator},
+      </if>
+	  <if test="reviewRemark != null" >
+        `review_remark` = #{reviewRemark},
+      </if>
+	  <if test="reviewTime != null" >
+        `review_time` = #{reviewTime},
+      </if>
+	  <if test="finalRemark != null" >
+        `final_remark` = #{finalRemark},
+      </if>
+	  <if test="operateReview2 != null" >
+        `operate_review2` = #{operateReview2},
+      </if>
+	  <if test="finalTime != null" >
+        `final_time` = #{finalTime},
+      </if>
+	  <if test="transferRemark != null" >
+        `transfer_remark` = #{transferRemark},
+      </if>
+	  <if test="operateReview3 != null" >
+        `operate_review3` = #{operateReview3},
+      </if>
+	  <if test="transferTime != null" >
+        `transfer_time` = #{transferTime},
+      </if>
+    </set>
+    WHERE `id` = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yinmimoney.web.p2pnew.pojo.BorrowApply" >
+	UPDATE `borrow_apply` SET
+        `id` = #{id},
+        `user_code` = #{userCode},
+        `apply_no` = #{applyNo},
+        `car_type` = #{carType},
+        `car_brand` = #{carBrand},
+        `car_model` = #{carModel},
+        `car_vin_no` = #{carVinNo},
+        `insurance` = #{insurance},
+        `car_price` = #{carPrice},
+        `evaluate_price` = #{evaluatePrice},
+        `loan_bank` = #{loanBank},
+        `loan_type` = #{loanType},
+        `loan_money` = #{loanMoney},
+        `loan_scale` = #{loanScale},
+        `first_payment_money` = #{firstPaymentMoney},
+        `first_payment_scale` = #{firstPaymentScale},
+        `loan_time` = #{loanTime},
+        `period_repayment_money` = #{periodRepaymentMoney},
+        `loan_apr` = #{loanApr},
+        `all_repayment_money` = #{allRepaymentMoney},
+        `first_repayment_money` = #{firstRepaymentMoney},
+        `actual_repayment_money` = #{actualRepaymentMoney},
+        `status` = #{status},
+        `operate_establish` = #{operateEstablish},
+        `establish_time` = #{establishTime},
+        `trial_remark` = #{trialRemark},
+        `trial_operator` = #{trialOperator},
+        `trial_time` = #{trialTime},
+        `review_operator` = #{reviewOperator},
+        `review_remark` = #{reviewRemark},
+        `review_time` = #{reviewTime},
+        `final_remark` = #{finalRemark},
+        `operate_review2` = #{operateReview2},
+        `final_time` = #{finalTime},
+        `transfer_remark` = #{transferRemark},
+        `operate_review3` = #{operateReview3},
+        `transfer_time` = #{transferTime}
+    WHERE `id` = #{id}
+  </update>
+  <update id="updateByCondition" parameterType="java.util.Map" >
+    UPDATE `borrow_apply`
+    <set>
+	  <if test="entity.id != null" >
+        `id` = #{entity.id},
+      </if>
+	  <if test="entity.userCode != null" >
+        `user_code` = #{entity.userCode},
+      </if>
+	  <if test="entity.applyNo != null" >
+        `apply_no` = #{entity.applyNo},
+      </if>
+	  <if test="entity.carType != null" >
+        `car_type` = #{entity.carType},
+      </if>
+	  <if test="entity.carBrand != null" >
+        `car_brand` = #{entity.carBrand},
+      </if>
+	  <if test="entity.carModel != null" >
+        `car_model` = #{entity.carModel},
+      </if>
+	  <if test="entity.carVinNo != null" >
+        `car_vin_no` = #{entity.carVinNo},
+      </if>
+	  <if test="entity.insurance != null" >
+        `insurance` = #{entity.insurance},
+      </if>
+	  <if test="entity.carPrice != null" >
+        `car_price` = #{entity.carPrice},
+      </if>
+	  <if test="entity.evaluatePrice != null" >
+        `evaluate_price` = #{entity.evaluatePrice},
+      </if>
+	  <if test="entity.loanBank != null" >
+        `loan_bank` = #{entity.loanBank},
+      </if>
+	  <if test="entity.loanType != null" >
+        `loan_type` = #{entity.loanType},
+      </if>
+	  <if test="entity.loanMoney != null" >
+        `loan_money` = #{entity.loanMoney},
+      </if>
+	  <if test="entity.loanScale != null" >
+        `loan_scale` = #{entity.loanScale},
+      </if>
+	  <if test="entity.firstPaymentMoney != null" >
+        `first_payment_money` = #{entity.firstPaymentMoney},
+      </if>
+	  <if test="entity.firstPaymentScale != null" >
+        `first_payment_scale` = #{entity.firstPaymentScale},
+      </if>
+	  <if test="entity.loanTime != null" >
+        `loan_time` = #{entity.loanTime},
+      </if>
+	  <if test="entity.periodRepaymentMoney != null" >
+        `period_repayment_money` = #{entity.periodRepaymentMoney},
+      </if>
+	  <if test="entity.loanApr != null" >
+        `loan_apr` = #{entity.loanApr},
+      </if>
+	  <if test="entity.allRepaymentMoney != null" >
+        `all_repayment_money` = #{entity.allRepaymentMoney},
+      </if>
+	  <if test="entity.firstRepaymentMoney != null" >
+        `first_repayment_money` = #{entity.firstRepaymentMoney},
+      </if>
+	  <if test="entity.actualRepaymentMoney != null" >
+        `actual_repayment_money` = #{entity.actualRepaymentMoney},
+      </if>
+	  <if test="entity.status != null" >
+        `status` = #{entity.status},
+      </if>
+	  <if test="entity.operateEstablish != null" >
+        `operate_establish` = #{entity.operateEstablish},
+      </if>
+	  <if test="entity.establishTime != null" >
+        `establish_time` = #{entity.establishTime},
+      </if>
+	  <if test="entity.trialRemark != null" >
+        `trial_remark` = #{entity.trialRemark},
+      </if>
+	  <if test="entity.trialOperator != null" >
+        `trial_operator` = #{entity.trialOperator},
+      </if>
+	  <if test="entity.trialTime != null" >
+        `trial_time` = #{entity.trialTime},
+      </if>
+	  <if test="entity.reviewOperator != null" >
+        `review_operator` = #{entity.reviewOperator},
+      </if>
+	  <if test="entity.reviewRemark != null" >
+        `review_remark` = #{entity.reviewRemark},
+      </if>
+	  <if test="entity.reviewTime != null" >
+        `review_time` = #{entity.reviewTime},
+      </if>
+	  <if test="entity.finalRemark != null" >
+        `final_remark` = #{entity.finalRemark},
+      </if>
+	  <if test="entity.operateReview2 != null" >
+        `operate_review2` = #{entity.operateReview2},
+      </if>
+	  <if test="entity.finalTime != null" >
+        `final_time` = #{entity.finalTime},
+      </if>
+	  <if test="entity.transferRemark != null" >
+        `transfer_remark` = #{entity.transferRemark},
+      </if>
+	  <if test="entity.operateReview3 != null" >
+        `operate_review3` = #{entity.operateReview3},
+      </if>
+	  <if test="entity.transferTime != null" >
+        `transfer_time` = #{entity.transferTime},
+      </if>
+      <foreach collection="entity.nullColums" item="nullColum">
+        `${nullColum}` = NULL,
+      </foreach>
+    </set>
+    <include refid="map_params_where_condition" />
+  </update>
+  <update id="updateIncreateNumbers" parameterType="java.util.Map" >
+    UPDATE `borrow_apply`
+    <set>
+      <foreach collection="increateNumbers" item="numberCloums">
+        `${numberCloums.column}` = `${numberCloums.column}` + #{numberCloums.number},
+      </foreach>
+    </set>
+    <include refid="map_params_where_condition" />
+  </update>
+  <sql id="map_params_where_condition" >
+    <trim prefix="WHERE" prefixOverrides="AND">
+	  <if test="id != null" >
+        AND `id` = #{id}
+	  </if>
+	  <if test="userCode != null" >
+        AND `user_code` = #{userCode}
+	  </if>
+	  <if test="applyNo != null" >
+        AND `apply_no` = #{applyNo}
+	  </if>
+	  <if test="carType != null" >
+        AND `car_type` = #{carType}
+	  </if>
+	  <if test="carBrand != null" >
+        AND `car_brand` = #{carBrand}
+	  </if>
+	  <if test="carModel != null" >
+        AND `car_model` = #{carModel}
+	  </if>
+	  <if test="carVinNo != null" >
+        AND `car_vin_no` = #{carVinNo}
+	  </if>
+	  <if test="insurance != null" >
+        AND `insurance` = #{insurance}
+	  </if>
+	  <if test="carPrice != null" >
+        AND `car_price` = #{carPrice}
+	  </if>
+	  <if test="evaluatePrice != null" >
+        AND `evaluate_price` = #{evaluatePrice}
+	  </if>
+	  <if test="loanBank != null" >
+        AND `loan_bank` = #{loanBank}
+	  </if>
+	  <if test="loanType != null" >
+        AND `loan_type` = #{loanType}
+	  </if>
+	  <if test="loanMoney != null" >
+        AND `loan_money` = #{loanMoney}
+	  </if>
+	  <if test="loanScale != null" >
+        AND `loan_scale` = #{loanScale}
+	  </if>
+	  <if test="firstPaymentMoney != null" >
+        AND `first_payment_money` = #{firstPaymentMoney}
+	  </if>
+	  <if test="firstPaymentScale != null" >
+        AND `first_payment_scale` = #{firstPaymentScale}
+	  </if>
+	  <if test="loanTime != null" >
+        AND `loan_time` = #{loanTime}
+	  </if>
+	  <if test="periodRepaymentMoney != null" >
+        AND `period_repayment_money` = #{periodRepaymentMoney}
+	  </if>
+	  <if test="loanApr != null" >
+        AND `loan_apr` = #{loanApr}
+	  </if>
+	  <if test="allRepaymentMoney != null" >
+        AND `all_repayment_money` = #{allRepaymentMoney}
+	  </if>
+	  <if test="firstRepaymentMoney != null" >
+        AND `first_repayment_money` = #{firstRepaymentMoney}
+	  </if>
+	  <if test="actualRepaymentMoney != null" >
+        AND `actual_repayment_money` = #{actualRepaymentMoney}
+	  </if>
+	  <if test="status != null" >
+        AND `status` = #{status}
+	  </if>
+	  <if test="operateEstablish != null" >
+        AND `operate_establish` = #{operateEstablish}
+	  </if>
+	  <if test="establishTime != null" >
+        AND `establish_time` = #{establishTime}
+	  </if>
+	  <if test="trialRemark != null" >
+        AND `trial_remark` = #{trialRemark}
+	  </if>
+	  <if test="trialOperator != null" >
+        AND `trial_operator` = #{trialOperator}
+	  </if>
+	  <if test="trialTime != null" >
+        AND `trial_time` = #{trialTime}
+	  </if>
+	  <if test="reviewOperator != null" >
+        AND `review_operator` = #{reviewOperator}
+	  </if>
+	  <if test="reviewRemark != null" >
+        AND `review_remark` = #{reviewRemark}
+	  </if>
+	  <if test="reviewTime != null" >
+        AND `review_time` = #{reviewTime}
+	  </if>
+	  <if test="finalRemark != null" >
+        AND `final_remark` = #{finalRemark}
+	  </if>
+	  <if test="operateReview2 != null" >
+        AND `operate_review2` = #{operateReview2}
+	  </if>
+	  <if test="finalTime != null" >
+        AND `final_time` = #{finalTime}
+	  </if>
+	  <if test="transferRemark != null" >
+        AND `transfer_remark` = #{transferRemark}
+	  </if>
+	  <if test="operateReview3 != null" >
+        AND `operate_review3` = #{operateReview3}
+	  </if>
+	  <if test="transferTime != null" >
+        AND `transfer_time` = #{transferTime}
+	  </if>
+	  <if test="condition != null">
+	  <if test="condition.id != null" >
+        AND `id` = #{condition.id}
+	  </if>
+	  <if test="condition.userCode != null" >
+        AND `user_code` = #{condition.userCode}
+	  </if>
+	  <if test="condition.applyNo != null" >
+        AND `apply_no` = #{condition.applyNo}
+	  </if>
+	  <if test="condition.carType != null" >
+        AND `car_type` = #{condition.carType}
+	  </if>
+	  <if test="condition.carBrand != null" >
+        AND `car_brand` = #{condition.carBrand}
+	  </if>
+	  <if test="condition.carModel != null" >
+        AND `car_model` = #{condition.carModel}
+	  </if>
+	  <if test="condition.carVinNo != null" >
+        AND `car_vin_no` = #{condition.carVinNo}
+	  </if>
+	  <if test="condition.insurance != null" >
+        AND `insurance` = #{condition.insurance}
+	  </if>
+	  <if test="condition.carPrice != null" >
+        AND `car_price` = #{condition.carPrice}
+	  </if>
+	  <if test="condition.evaluatePrice != null" >
+        AND `evaluate_price` = #{condition.evaluatePrice}
+	  </if>
+	  <if test="condition.loanBank != null" >
+        AND `loan_bank` = #{condition.loanBank}
+	  </if>
+	  <if test="condition.loanType != null" >
+        AND `loan_type` = #{condition.loanType}
+	  </if>
+	  <if test="condition.loanMoney != null" >
+        AND `loan_money` = #{condition.loanMoney}
+	  </if>
+	  <if test="condition.loanScale != null" >
+        AND `loan_scale` = #{condition.loanScale}
+	  </if>
+	  <if test="condition.firstPaymentMoney != null" >
+        AND `first_payment_money` = #{condition.firstPaymentMoney}
+	  </if>
+	  <if test="condition.firstPaymentScale != null" >
+        AND `first_payment_scale` = #{condition.firstPaymentScale}
+	  </if>
+	  <if test="condition.loanTime != null" >
+        AND `loan_time` = #{condition.loanTime}
+	  </if>
+	  <if test="condition.periodRepaymentMoney != null" >
+        AND `period_repayment_money` = #{condition.periodRepaymentMoney}
+	  </if>
+	  <if test="condition.loanApr != null" >
+        AND `loan_apr` = #{condition.loanApr}
+	  </if>
+	  <if test="condition.allRepaymentMoney != null" >
+        AND `all_repayment_money` = #{condition.allRepaymentMoney}
+	  </if>
+	  <if test="condition.firstRepaymentMoney != null" >
+        AND `first_repayment_money` = #{condition.firstRepaymentMoney}
+	  </if>
+	  <if test="condition.actualRepaymentMoney != null" >
+        AND `actual_repayment_money` = #{condition.actualRepaymentMoney}
+	  </if>
+	  <if test="condition.status != null" >
+        AND `status` = #{condition.status}
+	  </if>
+	  <if test="condition.operateEstablish != null" >
+        AND `operate_establish` = #{condition.operateEstablish}
+	  </if>
+	  <if test="condition.establishTime != null" >
+        AND `establish_time` = #{condition.establishTime}
+	  </if>
+	  <if test="condition.trialRemark != null" >
+        AND `trial_remark` = #{condition.trialRemark}
+	  </if>
+	  <if test="condition.trialOperator != null" >
+        AND `trial_operator` = #{condition.trialOperator}
+	  </if>
+	  <if test="condition.trialTime != null" >
+        AND `trial_time` = #{condition.trialTime}
+	  </if>
+	  <if test="condition.reviewOperator != null" >
+        AND `review_operator` = #{condition.reviewOperator}
+	  </if>
+	  <if test="condition.reviewRemark != null" >
+        AND `review_remark` = #{condition.reviewRemark}
+	  </if>
+	  <if test="condition.reviewTime != null" >
+        AND `review_time` = #{condition.reviewTime}
+	  </if>
+	  <if test="condition.finalRemark != null" >
+        AND `final_remark` = #{condition.finalRemark}
+	  </if>
+	  <if test="condition.operateReview2 != null" >
+        AND `operate_review2` = #{condition.operateReview2}
+	  </if>
+	  <if test="condition.finalTime != null" >
+        AND `final_time` = #{condition.finalTime}
+	  </if>
+	  <if test="condition.transferRemark != null" >
+        AND `transfer_remark` = #{condition.transferRemark}
+	  </if>
+	  <if test="condition.operateReview3 != null" >
+        AND `operate_review3` = #{condition.operateReview3}
+	  </if>
+	  <if test="condition.transferTime != null" >
+        AND `transfer_time` = #{condition.transferTime}
+	  </if>
+	  </if>
+	  <if test="vo != null and !vo.expressionChainList.empty">
+        AND
+        <foreach collection="vo.expressionChainList" item="expressionChain" separator="OR">
+          <if test="!expressionChain.expressionList.empty">
+            <foreach collection="expressionChain.expressionList" item="expression" separator="AND">
+              <choose>
+                <when test="expression.type == 0">
+                  `${expression.column}` ${expression.operator}
+                </when>
+                <when test="expression.type == 1">
+                  `${expression.column}` ${expression.operator} #{expression.value}
+                </when>
+                <when test="expression.type == 2">
+                  `${expression.column}` ${expression.operator} #{expression.value} AND #{expression.value1}
+                </when>
+                <when test="expression.type == 3">
+                  `${expression.column}` ${expression.operator}
+                  <foreach collection="expression.values" item="value" open="(" separator="," close=")">
+                    #{value}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </if>
+        </foreach>
+      </if>
+      <if test="expressionChainList != null and !expressionChainList.empty">
+        AND
+        <foreach collection="expressionChainList" item="expressionChain" separator="OR">
+          <if test="!expressionChain.expressionList.empty">
+            <foreach collection="expressionChain.expressionList" item="expression" separator="AND">
+              <choose>
+                <when test="expression.type == 0">
+                  `${expression.column}` ${expression.operator}
+                </when>
+                <when test="expression.type == 1">
+                  `${expression.column}` ${expression.operator} #{expression.value}
+                </when>
+                <when test="expression.type == 2">
+                  `${expression.column}` ${expression.operator} #{expression.value} AND #{expression.value1}
+                </when>
+                <when test="expression.type == 3">
+                  `${expression.column}` ${expression.operator}
+                  <foreach collection="expression.values" item="value" open="(" separator="," close=")">
+                    #{value}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </if>
+        </foreach>
+      </if>
+      <include refid="map_params_where_condition_ext" />
+    </trim>
+  </sql>
+  <select id="getList" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM `borrow_apply`
+    <include refid="map_params_where_condition" />
+    <if test="orderBy == null" >
+      ORDER BY `id` DESC
+    </if>
+    <if test="orderBy != null and orderBy != 'no'" >
+      ORDER BY ${orderBy}
+    </if>
+    <if test="pageBeginIndex != null and pageSize != null" >
+      LIMIT #{pageBeginIndex},#{pageSize}
+    </if>
+    <if test="pageBeginIndex == null and pageSize != null" >
+      LIMIT #{pageSize}
+    </if>
+    <if test="pageBeginIndex != null and pageSize == null" >
+      LIMIT #{pageBeginIndex}
+    </if>
+  </select>
+  <delete id="delete" parameterType="java.util.Map" >
+    DELETE
+    FROM `borrow_apply`
+    <include refid="map_params_where_condition" />
+  </delete>
+  <select id="getCount" resultType="java.lang.Integer" parameterType="java.util.Map" >
+    SELECT COUNT(1)
+    FROM `borrow_apply`
+    <include refid="map_params_where_condition" />
+  </select>
+</mapper>

@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yinmimoney.web.p2pnew.dao.UserApplySpouseInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.yinmimoney.web.p2pnew.pojo.UserApplySpouseInfo" extends="associationMap">
+	<id column="id" property="id" />
+	<result column="user_code" property="userCode" />
+	<result column="apply_no" property="applyNo" />
+	<result column="spouse_real_name" property="spouseRealName" />
+	<result column="spouse_mobile_phone" property="spouseMobilePhone" />
+	<result column="spouse_id_card" property="spouseIdCard" />
+	<result column="spouse_photo" property="spousePhoto" />
+	<result column="spouse_company" property="spouseCompany" />
+	<result column="spouse_company_phone" property="spouseCompanyPhone" />
+	<result column="spouse_company_address" property="spouseCompanyAddress" />
+	<result column="add_time" property="addTime" />
+	<result column="update_time" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+		`id`
+		,`user_code`
+		,`apply_no`
+		,`spouse_real_name`
+		,`spouse_mobile_phone`
+		,`spouse_id_card`
+		,`spouse_photo`
+		,`spouse_company`
+		,`spouse_company_phone`
+		,`spouse_company_address`
+		,`add_time`
+		,`update_time`
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    SELECT 
+    <include refid="Base_Column_List" />
+    FROM `user_apply_spouse_info`
+    WHERE `id` = #{id}
+  </select>
+  <select id="getByCondition" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    SELECT 
+    <include refid="Base_Column_List" />
+    FROM `user_apply_spouse_info`
+    <include refid="map_params_where_condition" />
+    <if test="orderBy == null" >
+      ORDER BY `id` DESC
+    </if>
+    <if test="orderBy != null and orderBy != 'no'" >
+      ORDER BY ${orderBy}
+    </if>
+	LIMIT 1
+  </select>
+  <select id="aggregate" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT ${aggregate_sql} FROM `user_apply_spouse_info`
+    <include refid="map_params_where_condition" />
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    DELETE FROM `user_apply_spouse_info`
+    WHERE `id` = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.yinmimoney.web.p2pnew.pojo.UserApplySpouseInfo" >
+    INSERT INTO `user_apply_spouse_info` (
+	  `id`
+	  ,`user_code`
+	  ,`apply_no`
+	  ,`spouse_real_name`
+	  ,`spouse_mobile_phone`
+	  ,`spouse_id_card`
+	  ,`spouse_photo`
+	  ,`spouse_company`
+	  ,`spouse_company_phone`
+	  ,`spouse_company_address`
+	  ,`add_time`
+	  ,`update_time`
+      )
+    VALUES (
+		  
+		  #{id}
+		  ,
+		  #{userCode}
+		  ,
+		  #{applyNo}
+		  ,
+		  #{spouseRealName}
+		  ,
+		  #{spouseMobilePhone}
+		  ,
+		  #{spouseIdCard}
+		  ,
+		  #{spousePhoto}
+		  ,
+		  #{spouseCompany}
+		  ,
+		  #{spouseCompanyPhone}
+		  ,
+		  #{spouseCompanyAddress}
+		  ,
+		  <if test="addTime != null" >
+			#{addTime}
+      </if>
+      <if test="addTime == null" >
+      NOW()
+		  </if>
+		  ,
+		  #{updateTime}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yinmimoney.web.p2pnew.pojo.UserApplySpouseInfo" >
+    INSERT INTO `user_apply_spouse_info`
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+		  <if test="id != null" >
+			`id`,
+		  </if>
+		  <if test="userCode != null" >
+			`user_code`,
+		  </if>
+		  <if test="applyNo != null" >
+			`apply_no`,
+		  </if>
+		  <if test="spouseRealName != null" >
+			`spouse_real_name`,
+		  </if>
+		  <if test="spouseMobilePhone != null" >
+			`spouse_mobile_phone`,
+		  </if>
+		  <if test="spouseIdCard != null" >
+			`spouse_id_card`,
+		  </if>
+		  <if test="spousePhoto != null" >
+			`spouse_photo`,
+		  </if>
+		  <if test="spouseCompany != null" >
+			`spouse_company`,
+		  </if>
+		  <if test="spouseCompanyPhone != null" >
+			`spouse_company_phone`,
+		  </if>
+		  <if test="spouseCompanyAddress != null" >
+			`spouse_company_address`,
+		  </if>
+			`add_time`,
+		  <if test="updateTime != null" >
+			`update_time`,
+		  </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+		  <if test="id != null" >
+			#{id},
+		  </if>
+		  <if test="userCode != null" >
+			#{userCode},
+		  </if>
+		  <if test="applyNo != null" >
+			#{applyNo},
+		  </if>
+		  <if test="spouseRealName != null" >
+			#{spouseRealName},
+		  </if>
+		  <if test="spouseMobilePhone != null" >
+			#{spouseMobilePhone},
+		  </if>
+		  <if test="spouseIdCard != null" >
+			#{spouseIdCard},
+		  </if>
+		  <if test="spousePhoto != null" >
+			#{spousePhoto},
+		  </if>
+		  <if test="spouseCompany != null" >
+			#{spouseCompany},
+		  </if>
+		  <if test="spouseCompanyPhone != null" >
+			#{spouseCompanyPhone},
+		  </if>
+		  <if test="spouseCompanyAddress != null" >
+			#{spouseCompanyAddress},
+		  </if>
+		  <if test="addTime != null" >
+			#{addTime},
+      </if>
+      <if test="addTime == null" >
+      NOW(),
+		  </if>
+		  <if test="updateTime != null" >
+			#{updateTime},
+		  </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yinmimoney.web.p2pnew.pojo.UserApplySpouseInfo" >
+    UPDATE `user_apply_spouse_info`
+    <set >
+	  <if test="id != null" >
+        `id` = #{id},
+      </if>
+	  <if test="userCode != null" >
+        `user_code` = #{userCode},
+      </if>
+	  <if test="applyNo != null" >
+        `apply_no` = #{applyNo},
+      </if>
+	  <if test="spouseRealName != null" >
+        `spouse_real_name` = #{spouseRealName},
+      </if>
+	  <if test="spouseMobilePhone != null" >
+        `spouse_mobile_phone` = #{spouseMobilePhone},
+      </if>
+	  <if test="spouseIdCard != null" >
+        `spouse_id_card` = #{spouseIdCard},
+      </if>
+	  <if test="spousePhoto != null" >
+        `spouse_photo` = #{spousePhoto},
+      </if>
+	  <if test="spouseCompany != null" >
+        `spouse_company` = #{spouseCompany},
+      </if>
+	  <if test="spouseCompanyPhone != null" >
+        `spouse_company_phone` = #{spouseCompanyPhone},
+      </if>
+	  <if test="spouseCompanyAddress != null" >
+        `spouse_company_address` = #{spouseCompanyAddress},
+      </if>
+	  <if test="addTime != null" >
+        `add_time` = #{addTime},
+      </if>
+	  <if test="updateTime != null" >
+        `update_time` = #{updateTime},
+      </if>
+    </set>
+    WHERE `id` = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yinmimoney.web.p2pnew.pojo.UserApplySpouseInfo" >
+	UPDATE `user_apply_spouse_info` SET
+        `id` = #{id},
+        `user_code` = #{userCode},
+        `apply_no` = #{applyNo},
+        `spouse_real_name` = #{spouseRealName},
+        `spouse_mobile_phone` = #{spouseMobilePhone},
+        `spouse_id_card` = #{spouseIdCard},
+        `spouse_photo` = #{spousePhoto},
+        `spouse_company` = #{spouseCompany},
+        `spouse_company_phone` = #{spouseCompanyPhone},
+        `spouse_company_address` = #{spouseCompanyAddress},
+        `add_time` = #{addTime},
+        `update_time` = #{updateTime}
+    WHERE `id` = #{id}
+  </update>
+  <update id="updateByCondition" parameterType="java.util.Map" >
+    UPDATE `user_apply_spouse_info`
+    <set>
+	  <if test="entity.id != null" >
+        `id` = #{entity.id},
+      </if>
+	  <if test="entity.userCode != null" >
+        `user_code` = #{entity.userCode},
+      </if>
+	  <if test="entity.applyNo != null" >
+        `apply_no` = #{entity.applyNo},
+      </if>
+	  <if test="entity.spouseRealName != null" >
+        `spouse_real_name` = #{entity.spouseRealName},
+      </if>
+	  <if test="entity.spouseMobilePhone != null" >
+        `spouse_mobile_phone` = #{entity.spouseMobilePhone},
+      </if>
+	  <if test="entity.spouseIdCard != null" >
+        `spouse_id_card` = #{entity.spouseIdCard},
+      </if>
+	  <if test="entity.spousePhoto != null" >
+        `spouse_photo` = #{entity.spousePhoto},
+      </if>
+	  <if test="entity.spouseCompany != null" >
+        `spouse_company` = #{entity.spouseCompany},
+      </if>
+	  <if test="entity.spouseCompanyPhone != null" >
+        `spouse_company_phone` = #{entity.spouseCompanyPhone},
+      </if>
+	  <if test="entity.spouseCompanyAddress != null" >
+        `spouse_company_address` = #{entity.spouseCompanyAddress},
+      </if>
+	  <if test="entity.addTime != null" >
+        `add_time` = #{entity.addTime},
+      </if>
+	  <if test="entity.updateTime != null" >
+        `update_time` = #{entity.updateTime},
+      </if>
+      <foreach collection="entity.nullColums" item="nullColum">
+        `${nullColum}` = NULL,
+      </foreach>
+    </set>
+    <include refid="map_params_where_condition" />
+  </update>
+  <update id="updateIncreateNumbers" parameterType="java.util.Map" >
+    UPDATE `user_apply_spouse_info`
+    <set>
+      <foreach collection="increateNumbers" item="numberCloums">
+        `${numberCloums.column}` = `${numberCloums.column}` + #{numberCloums.number},
+      </foreach>
+    </set>
+    <include refid="map_params_where_condition" />
+  </update>
+  <sql id="map_params_where_condition" >
+    <trim prefix="WHERE" prefixOverrides="AND">
+	  <if test="id != null" >
+        AND `id` = #{id}
+	  </if>
+	  <if test="userCode != null" >
+        AND `user_code` = #{userCode}
+	  </if>
+	  <if test="applyNo != null" >
+        AND `apply_no` = #{applyNo}
+	  </if>
+	  <if test="spouseRealName != null" >
+        AND `spouse_real_name` = #{spouseRealName}
+	  </if>
+	  <if test="spouseMobilePhone != null" >
+        AND `spouse_mobile_phone` = #{spouseMobilePhone}
+	  </if>
+	  <if test="spouseIdCard != null" >
+        AND `spouse_id_card` = #{spouseIdCard}
+	  </if>
+	  <if test="spousePhoto != null" >
+        AND `spouse_photo` = #{spousePhoto}
+	  </if>
+	  <if test="spouseCompany != null" >
+        AND `spouse_company` = #{spouseCompany}
+	  </if>
+	  <if test="spouseCompanyPhone != null" >
+        AND `spouse_company_phone` = #{spouseCompanyPhone}
+	  </if>
+	  <if test="spouseCompanyAddress != null" >
+        AND `spouse_company_address` = #{spouseCompanyAddress}
+	  </if>
+	  <if test="addTime != null" >
+        AND `add_time` = #{addTime}
+	  </if>
+	  <if test="updateTime != null" >
+        AND `update_time` = #{updateTime}
+	  </if>
+	  <if test="condition != null">
+	  <if test="condition.id != null" >
+        AND `id` = #{condition.id}
+	  </if>
+	  <if test="condition.userCode != null" >
+        AND `user_code` = #{condition.userCode}
+	  </if>
+	  <if test="condition.applyNo != null" >
+        AND `apply_no` = #{condition.applyNo}
+	  </if>
+	  <if test="condition.spouseRealName != null" >
+        AND `spouse_real_name` = #{condition.spouseRealName}
+	  </if>
+	  <if test="condition.spouseMobilePhone != null" >
+        AND `spouse_mobile_phone` = #{condition.spouseMobilePhone}
+	  </if>
+	  <if test="condition.spouseIdCard != null" >
+        AND `spouse_id_card` = #{condition.spouseIdCard}
+	  </if>
+	  <if test="condition.spousePhoto != null" >
+        AND `spouse_photo` = #{condition.spousePhoto}
+	  </if>
+	  <if test="condition.spouseCompany != null" >
+        AND `spouse_company` = #{condition.spouseCompany}
+	  </if>
+	  <if test="condition.spouseCompanyPhone != null" >
+        AND `spouse_company_phone` = #{condition.spouseCompanyPhone}
+	  </if>
+	  <if test="condition.spouseCompanyAddress != null" >
+        AND `spouse_company_address` = #{condition.spouseCompanyAddress}
+	  </if>
+	  <if test="condition.addTime != null" >
+        AND `add_time` = #{condition.addTime}
+	  </if>
+	  <if test="condition.updateTime != null" >
+        AND `update_time` = #{condition.updateTime}
+	  </if>
+	  </if>
+	  <if test="vo != null and !vo.expressionChainList.empty">
+        AND
+        <foreach collection="vo.expressionChainList" item="expressionChain" separator="OR">
+          <if test="!expressionChain.expressionList.empty">
+            <foreach collection="expressionChain.expressionList" item="expression" separator="AND">
+              <choose>
+                <when test="expression.type == 0">
+                  `${expression.column}` ${expression.operator}
+                </when>
+                <when test="expression.type == 1">
+                  `${expression.column}` ${expression.operator} #{expression.value}
+                </when>
+                <when test="expression.type == 2">
+                  `${expression.column}` ${expression.operator} #{expression.value} AND #{expression.value1}
+                </when>
+                <when test="expression.type == 3">
+                  `${expression.column}` ${expression.operator}
+                  <foreach collection="expression.values" item="value" open="(" separator="," close=")">
+                    #{value}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </if>
+        </foreach>
+      </if>
+      <if test="expressionChainList != null and !expressionChainList.empty">
+        AND
+        <foreach collection="expressionChainList" item="expressionChain" separator="OR">
+          <if test="!expressionChain.expressionList.empty">
+            <foreach collection="expressionChain.expressionList" item="expression" separator="AND">
+              <choose>
+                <when test="expression.type == 0">
+                  `${expression.column}` ${expression.operator}
+                </when>
+                <when test="expression.type == 1">
+                  `${expression.column}` ${expression.operator} #{expression.value}
+                </when>
+                <when test="expression.type == 2">
+                  `${expression.column}` ${expression.operator} #{expression.value} AND #{expression.value1}
+                </when>
+                <when test="expression.type == 3">
+                  `${expression.column}` ${expression.operator}
+                  <foreach collection="expression.values" item="value" open="(" separator="," close=")">
+                    #{value}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </if>
+        </foreach>
+      </if>
+      <include refid="map_params_where_condition_ext" />
+    </trim>
+  </sql>
+  <select id="getList" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM `user_apply_spouse_info`
+    <include refid="map_params_where_condition" />
+    <if test="orderBy == null" >
+      ORDER BY `id` DESC
+    </if>
+    <if test="orderBy != null and orderBy != 'no'" >
+      ORDER BY ${orderBy}
+    </if>
+    <if test="pageBeginIndex != null and pageSize != null" >
+      LIMIT #{pageBeginIndex},#{pageSize}
+    </if>
+    <if test="pageBeginIndex == null and pageSize != null" >
+      LIMIT #{pageSize}
+    </if>
+    <if test="pageBeginIndex != null and pageSize == null" >
+      LIMIT #{pageBeginIndex}
+    </if>
+  </select>
+  <delete id="delete" parameterType="java.util.Map" >
+    DELETE
+    FROM `user_apply_spouse_info`
+    <include refid="map_params_where_condition" />
+  </delete>
+  <select id="getCount" resultType="java.lang.Integer" parameterType="java.util.Map" >
+    SELECT COUNT(1)
+    FROM `user_apply_spouse_info`
+    <include refid="map_params_where_condition" />
+  </select>
+</mapper>

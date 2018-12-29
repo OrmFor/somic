@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>任务执行记录 - 索密克系统后台</title>
+
+		<meta name="description" content="Static &amp; Dynamic Tables" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<#include "/admin/include/cssjs_up.html" encoding="UTF-8"/>
+	</head>
+
+	<body>
+		<#assign adminMenuPosFlag="sysTaskLog">
+		<#include "/admin/include/head.html" encoding="UTF-8"/>
+		<div class="main-container" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+			</script>
+
+			<div class="main-container-inner">
+				<a class="menu-toggler" id="menu-toggler" href="#">
+					<span class="menu-text"></span>
+				</a>
+				<#include "/admin/include/menu.html" encoding="UTF-8"/>
+				<div class="main-content">
+					<div class="breadcrumbs" id="breadcrumbs">
+						<script type="text/javascript">
+							try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+						</script>
+
+						<ul class="breadcrumb">
+							<li>
+								<i class="icon-home home-icon"></i>
+								<a href="/admin/">首页</a>
+							</li>
+							<li class="active">任务执行记录</li>
+						</ul><!-- .breadcrumb -->
+					</div>
+
+					<div class="page-content">
+						<div class="page-header">
+							<h1>
+								列表
+								<small>
+									<i class="icon-double-angle-right"></i>
+									任务执行记录
+								</small>
+							</h1>
+						</div><!-- /.page-header -->
+						<div class="row">
+							<form method="post" action="/admin/sysTaskLog/list">
+								<div class="col-xs-3 form-group">
+									<div class="input-group">
+									  <div class="input-group-addon">任务名称:</div>
+									<input type="text" class="form-control" name="moduleName" value="${bean.moduleName}">
+									</div>
+								</div>
+								<div class="col-xs-3 form-group">
+									<div class="input-group">
+									  <div class="input-group-addon">是否成功:</div>
+									  <select name="isSuccess" class="form-control">
+										<option value="">全部</option>
+										<option value="true" ${(bean.isSuccess?exists && bean.isSuccess)?string("selected","")}>成功</option>
+										<option value="false" ${(bean.isSuccess?exists && !bean.isSuccess)?string("selected","")}>未成功</option>
+									  </select>
+									</div>
+								</div>
+							   <div class="col-xs-2 form-group">
+									<input type="hidden" name="token" value="${token}" />
+									<button class="btn btn-primary" type="submit">查询</button>
+								</div>
+							</form>
+						</div>
+						<div class="row">
+							<div class="col-xs-12">
+								<!-- PAGE CONTENT BEGINS -->
+
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="table-responsive">
+											<table id="sample-table-1" class="table table-striped table-bordered table-hover">
+												<thead>
+													<tr>
+														<th>序号</th>
+														<th>任务名称</th>
+														<th>主机</th>
+														<th>IP地址</th>
+														<th>是否成功</th>
+														<th>开始时间</th>
+														<th>结束时间</th>
+													</tr>
+												</thead>
+
+												<tbody>
+													<#list pageBean.result as bean>
+													<tr>
+														<td>
+														${bean.id}
+														</td>
+														<td>
+														${bean.moduleName}
+														</td>
+														<td>
+														${bean.hostname}
+														</td>
+														<td>
+														${bean.ipAddress}
+														</td>
+														<td>
+															<#if bean.isSuccess>&nbsp;&nbsp;
+																<i class="icon-ok green"></i>
+															<#else>
+																<i class="icon-remove  red"></i>
+															</#if>
+														</td>
+														<td>
+														<#if bean.createdAt?exists>
+														${bean.createdAt?string("yyyy-MM-dd HH:mm:ss")}
+														<#else>
+														-
+														</#if>
+														</td>
+														<td>
+														<#if bean.updatedAt?exists>
+														${bean.updatedAt?string("yyyy-MM-dd HH:mm:ss")}
+														<#else>
+														-
+														</#if>
+														</td>
+													</tr>
+													</#list>
+												</tbody>
+											</table>
+											${pageBean.pageToolBar}
+										</div><!-- /.table-responsive -->
+									</div><!-- /span -->
+								</div><!-- /row -->
+							</div><!-- /.col -->
+						</div><!-- /.row -->
+					</div><!-- /.page-content -->
+				</div><!-- /.main-content -->
+			</div><!-- /.main-container-inner -->
+			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+				<i class="icon-double-angle-up icon-only bigger-110"></i>
+			</a>
+		</div><!-- /.main-container -->
+		<#include "/admin/include/cssjs_down.html" encoding="UTF-8"/>
+	</body>
+</html>

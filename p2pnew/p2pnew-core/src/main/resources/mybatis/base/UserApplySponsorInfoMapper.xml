@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yinmimoney.web.p2pnew.dao.UserApplySponsorInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.yinmimoney.web.p2pnew.pojo.UserApplySponsorInfo" extends="associationMap">
+	<id column="id" property="id" />
+	<result column="user_code" property="userCode" />
+	<result column="apply_no" property="applyNo" />
+	<result column="sponsor_real_name" property="sponsorRealName" />
+	<result column="sponsor_mobile_phone" property="sponsorMobilePhone" />
+	<result column="sponsor_id_card" property="sponsorIdCard" />
+	<result column="sponsor_photo_info" property="sponsorPhotoInfo" />
+	<result column="sponsor_company" property="sponsorCompany" />
+	<result column="sponsor_company_phone" property="sponsorCompanyPhone" />
+	<result column="sponsor_company_address" property="sponsorCompanyAddress" />
+	<result column="add_time" property="addTime" />
+	<result column="update_time" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+		`id`
+		,`user_code`
+		,`apply_no`
+		,`sponsor_real_name`
+		,`sponsor_mobile_phone`
+		,`sponsor_id_card`
+		,`sponsor_photo_info`
+		,`sponsor_company`
+		,`sponsor_company_phone`
+		,`sponsor_company_address`
+		,`add_time`
+		,`update_time`
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    SELECT 
+    <include refid="Base_Column_List" />
+    FROM `user_apply_sponsor_info`
+    WHERE `id` = #{id}
+  </select>
+  <select id="getByCondition" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    SELECT 
+    <include refid="Base_Column_List" />
+    FROM `user_apply_sponsor_info`
+    <include refid="map_params_where_condition" />
+    <if test="orderBy == null" >
+      ORDER BY `id` DESC
+    </if>
+    <if test="orderBy != null and orderBy != 'no'" >
+      ORDER BY ${orderBy}
+    </if>
+	LIMIT 1
+  </select>
+  <select id="aggregate" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT ${aggregate_sql} FROM `user_apply_sponsor_info`
+    <include refid="map_params_where_condition" />
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    DELETE FROM `user_apply_sponsor_info`
+    WHERE `id` = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.yinmimoney.web.p2pnew.pojo.UserApplySponsorInfo" >
+    INSERT INTO `user_apply_sponsor_info` (
+	  `id`
+	  ,`user_code`
+	  ,`apply_no`
+	  ,`sponsor_real_name`
+	  ,`sponsor_mobile_phone`
+	  ,`sponsor_id_card`
+	  ,`sponsor_photo_info`
+	  ,`sponsor_company`
+	  ,`sponsor_company_phone`
+	  ,`sponsor_company_address`
+	  ,`add_time`
+	  ,`update_time`
+      )
+    VALUES (
+		  
+		  #{id}
+		  ,
+		  #{userCode}
+		  ,
+		  #{applyNo}
+		  ,
+		  #{sponsorRealName}
+		  ,
+		  #{sponsorMobilePhone}
+		  ,
+		  #{sponsorIdCard}
+		  ,
+		  #{sponsorPhotoInfo}
+		  ,
+		  #{sponsorCompany}
+		  ,
+		  #{sponsorCompanyPhone}
+		  ,
+		  #{sponsorCompanyAddress}
+		  ,
+		  <if test="addTime != null" >
+			#{addTime}
+      </if>
+      <if test="addTime == null" >
+      NOW()
+		  </if>
+		  ,
+		  #{updateTime}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yinmimoney.web.p2pnew.pojo.UserApplySponsorInfo" >
+    INSERT INTO `user_apply_sponsor_info`
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+		  <if test="id != null" >
+			`id`,
+		  </if>
+		  <if test="userCode != null" >
+			`user_code`,
+		  </if>
+		  <if test="applyNo != null" >
+			`apply_no`,
+		  </if>
+		  <if test="sponsorRealName != null" >
+			`sponsor_real_name`,
+		  </if>
+		  <if test="sponsorMobilePhone != null" >
+			`sponsor_mobile_phone`,
+		  </if>
+		  <if test="sponsorIdCard != null" >
+			`sponsor_id_card`,
+		  </if>
+		  <if test="sponsorPhotoInfo != null" >
+			`sponsor_photo_info`,
+		  </if>
+		  <if test="sponsorCompany != null" >
+			`sponsor_company`,
+		  </if>
+		  <if test="sponsorCompanyPhone != null" >
+			`sponsor_company_phone`,
+		  </if>
+		  <if test="sponsorCompanyAddress != null" >
+			`sponsor_company_address`,
+		  </if>
+			`add_time`,
+		  <if test="updateTime != null" >
+			`update_time`,
+		  </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+		  <if test="id != null" >
+			#{id},
+		  </if>
+		  <if test="userCode != null" >
+			#{userCode},
+		  </if>
+		  <if test="applyNo != null" >
+			#{applyNo},
+		  </if>
+		  <if test="sponsorRealName != null" >
+			#{sponsorRealName},
+		  </if>
+		  <if test="sponsorMobilePhone != null" >
+			#{sponsorMobilePhone},
+		  </if>
+		  <if test="sponsorIdCard != null" >
+			#{sponsorIdCard},
+		  </if>
+		  <if test="sponsorPhotoInfo != null" >
+			#{sponsorPhotoInfo},
+		  </if>
+		  <if test="sponsorCompany != null" >
+			#{sponsorCompany},
+		  </if>
+		  <if test="sponsorCompanyPhone != null" >
+			#{sponsorCompanyPhone},
+		  </if>
+		  <if test="sponsorCompanyAddress != null" >
+			#{sponsorCompanyAddress},
+		  </if>
+		  <if test="addTime != null" >
+			#{addTime},
+      </if>
+      <if test="addTime == null" >
+      NOW(),
+		  </if>
+		  <if test="updateTime != null" >
+			#{updateTime},
+		  </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yinmimoney.web.p2pnew.pojo.UserApplySponsorInfo" >
+    UPDATE `user_apply_sponsor_info`
+    <set >
+	  <if test="id != null" >
+        `id` = #{id},
+      </if>
+	  <if test="userCode != null" >
+        `user_code` = #{userCode},
+      </if>
+	  <if test="applyNo != null" >
+        `apply_no` = #{applyNo},
+      </if>
+	  <if test="sponsorRealName != null" >
+        `sponsor_real_name` = #{sponsorRealName},
+      </if>
+	  <if test="sponsorMobilePhone != null" >
+        `sponsor_mobile_phone` = #{sponsorMobilePhone},
+      </if>
+	  <if test="sponsorIdCard != null" >
+        `sponsor_id_card` = #{sponsorIdCard},
+      </if>
+	  <if test="sponsorPhotoInfo != null" >
+        `sponsor_photo_info` = #{sponsorPhotoInfo},
+      </if>
+	  <if test="sponsorCompany != null" >
+        `sponsor_company` = #{sponsorCompany},
+      </if>
+	  <if test="sponsorCompanyPhone != null" >
+        `sponsor_company_phone` = #{sponsorCompanyPhone},
+      </if>
+	  <if test="sponsorCompanyAddress != null" >
+        `sponsor_company_address` = #{sponsorCompanyAddress},
+      </if>
+	  <if test="addTime != null" >
+        `add_time` = #{addTime},
+      </if>
+	  <if test="updateTime != null" >
+        `update_time` = #{updateTime},
+      </if>
+    </set>
+    WHERE `id` = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yinmimoney.web.p2pnew.pojo.UserApplySponsorInfo" >
+	UPDATE `user_apply_sponsor_info` SET
+        `id` = #{id},
+        `user_code` = #{userCode},
+        `apply_no` = #{applyNo},
+        `sponsor_real_name` = #{sponsorRealName},
+        `sponsor_mobile_phone` = #{sponsorMobilePhone},
+        `sponsor_id_card` = #{sponsorIdCard},
+        `sponsor_photo_info` = #{sponsorPhotoInfo},
+        `sponsor_company` = #{sponsorCompany},
+        `sponsor_company_phone` = #{sponsorCompanyPhone},
+        `sponsor_company_address` = #{sponsorCompanyAddress},
+        `add_time` = #{addTime},
+        `update_time` = #{updateTime}
+    WHERE `id` = #{id}
+  </update>
+  <update id="updateByCondition" parameterType="java.util.Map" >
+    UPDATE `user_apply_sponsor_info`
+    <set>
+	  <if test="entity.id != null" >
+        `id` = #{entity.id},
+      </if>
+	  <if test="entity.userCode != null" >
+        `user_code` = #{entity.userCode},
+      </if>
+	  <if test="entity.applyNo != null" >
+        `apply_no` = #{entity.applyNo},
+      </if>
+	  <if test="entity.sponsorRealName != null" >
+        `sponsor_real_name` = #{entity.sponsorRealName},
+      </if>
+	  <if test="entity.sponsorMobilePhone != null" >
+        `sponsor_mobile_phone` = #{entity.sponsorMobilePhone},
+      </if>
+	  <if test="entity.sponsorIdCard != null" >
+        `sponsor_id_card` = #{entity.sponsorIdCard},
+      </if>
+	  <if test="entity.sponsorPhotoInfo != null" >
+        `sponsor_photo_info` = #{entity.sponsorPhotoInfo},
+      </if>
+	  <if test="entity.sponsorCompany != null" >
+        `sponsor_company` = #{entity.sponsorCompany},
+      </if>
+	  <if test="entity.sponsorCompanyPhone != null" >
+        `sponsor_company_phone` = #{entity.sponsorCompanyPhone},
+      </if>
+	  <if test="entity.sponsorCompanyAddress != null" >
+        `sponsor_company_address` = #{entity.sponsorCompanyAddress},
+      </if>
+	  <if test="entity.addTime != null" >
+        `add_time` = #{entity.addTime},
+      </if>
+	  <if test="entity.updateTime != null" >
+        `update_time` = #{entity.updateTime},
+      </if>
+      <foreach collection="entity.nullColums" item="nullColum">
+        `${nullColum}` = NULL,
+      </foreach>
+    </set>
+    <include refid="map_params_where_condition" />
+  </update>
+  <update id="updateIncreateNumbers" parameterType="java.util.Map" >
+    UPDATE `user_apply_sponsor_info`
+    <set>
+      <foreach collection="increateNumbers" item="numberCloums">
+        `${numberCloums.column}` = `${numberCloums.column}` + #{numberCloums.number},
+      </foreach>
+    </set>
+    <include refid="map_params_where_condition" />
+  </update>
+  <sql id="map_params_where_condition" >
+    <trim prefix="WHERE" prefixOverrides="AND">
+	  <if test="id != null" >
+        AND `id` = #{id}
+	  </if>
+	  <if test="userCode != null" >
+        AND `user_code` = #{userCode}
+	  </if>
+	  <if test="applyNo != null" >
+        AND `apply_no` = #{applyNo}
+	  </if>
+	  <if test="sponsorRealName != null" >
+        AND `sponsor_real_name` = #{sponsorRealName}
+	  </if>
+	  <if test="sponsorMobilePhone != null" >
+        AND `sponsor_mobile_phone` = #{sponsorMobilePhone}
+	  </if>
+	  <if test="sponsorIdCard != null" >
+        AND `sponsor_id_card` = #{sponsorIdCard}
+	  </if>
+	  <if test="sponsorPhotoInfo != null" >
+        AND `sponsor_photo_info` = #{sponsorPhotoInfo}
+	  </if>
+	  <if test="sponsorCompany != null" >
+        AND `sponsor_company` = #{sponsorCompany}
+	  </if>
+	  <if test="sponsorCompanyPhone != null" >
+        AND `sponsor_company_phone` = #{sponsorCompanyPhone}
+	  </if>
+	  <if test="sponsorCompanyAddress != null" >
+        AND `sponsor_company_address` = #{sponsorCompanyAddress}
+	  </if>
+	  <if test="addTime != null" >
+        AND `add_time` = #{addTime}
+	  </if>
+	  <if test="updateTime != null" >
+        AND `update_time` = #{updateTime}
+	  </if>
+	  <if test="condition != null">
+	  <if test="condition.id != null" >
+        AND `id` = #{condition.id}
+	  </if>
+	  <if test="condition.userCode != null" >
+        AND `user_code` = #{condition.userCode}
+	  </if>
+	  <if test="condition.applyNo != null" >
+        AND `apply_no` = #{condition.applyNo}
+	  </if>
+	  <if test="condition.sponsorRealName != null" >
+        AND `sponsor_real_name` = #{condition.sponsorRealName}
+	  </if>
+	  <if test="condition.sponsorMobilePhone != null" >
+        AND `sponsor_mobile_phone` = #{condition.sponsorMobilePhone}
+	  </if>
+	  <if test="condition.sponsorIdCard != null" >
+        AND `sponsor_id_card` = #{condition.sponsorIdCard}
+	  </if>
+	  <if test="condition.sponsorPhotoInfo != null" >
+        AND `sponsor_photo_info` = #{condition.sponsorPhotoInfo}
+	  </if>
+	  <if test="condition.sponsorCompany != null" >
+        AND `sponsor_company` = #{condition.sponsorCompany}
+	  </if>
+	  <if test="condition.sponsorCompanyPhone != null" >
+        AND `sponsor_company_phone` = #{condition.sponsorCompanyPhone}
+	  </if>
+	  <if test="condition.sponsorCompanyAddress != null" >
+        AND `sponsor_company_address` = #{condition.sponsorCompanyAddress}
+	  </if>
+	  <if test="condition.addTime != null" >
+        AND `add_time` = #{condition.addTime}
+	  </if>
+	  <if test="condition.updateTime != null" >
+        AND `update_time` = #{condition.updateTime}
+	  </if>
+	  </if>
+	  <if test="vo != null and !vo.expressionChainList.empty">
+        AND
+        <foreach collection="vo.expressionChainList" item="expressionChain" separator="OR">
+          <if test="!expressionChain.expressionList.empty">
+            <foreach collection="expressionChain.expressionList" item="expression" separator="AND">
+              <choose>
+                <when test="expression.type == 0">
+                  `${expression.column}` ${expression.operator}
+                </when>
+                <when test="expression.type == 1">
+                  `${expression.column}` ${expression.operator} #{expression.value}
+                </when>
+                <when test="expression.type == 2">
+                  `${expression.column}` ${expression.operator} #{expression.value} AND #{expression.value1}
+                </when>
+                <when test="expression.type == 3">
+                  `${expression.column}` ${expression.operator}
+                  <foreach collection="expression.values" item="value" open="(" separator="," close=")">
+                    #{value}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </if>
+        </foreach>
+      </if>
+      <if test="expressionChainList != null and !expressionChainList.empty">
+        AND
+        <foreach collection="expressionChainList" item="expressionChain" separator="OR">
+          <if test="!expressionChain.expressionList.empty">
+            <foreach collection="expressionChain.expressionList" item="expression" separator="AND">
+              <choose>
+                <when test="expression.type == 0">
+                  `${expression.column}` ${expression.operator}
+                </when>
+                <when test="expression.type == 1">
+                  `${expression.column}` ${expression.operator} #{expression.value}
+                </when>
+                <when test="expression.type == 2">
+                  `${expression.column}` ${expression.operator} #{expression.value} AND #{expression.value1}
+                </when>
+                <when test="expression.type == 3">
+                  `${expression.column}` ${expression.operator}
+                  <foreach collection="expression.values" item="value" open="(" separator="," close=")">
+                    #{value}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </if>
+        </foreach>
+      </if>
+      <include refid="map_params_where_condition_ext" />
+    </trim>
+  </sql>
+  <select id="getList" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM `user_apply_sponsor_info`
+    <include refid="map_params_where_condition" />
+    <if test="orderBy == null" >
+      ORDER BY `id` DESC
+    </if>
+    <if test="orderBy != null and orderBy != 'no'" >
+      ORDER BY ${orderBy}
+    </if>
+    <if test="pageBeginIndex != null and pageSize != null" >
+      LIMIT #{pageBeginIndex},#{pageSize}
+    </if>
+    <if test="pageBeginIndex == null and pageSize != null" >
+      LIMIT #{pageSize}
+    </if>
+    <if test="pageBeginIndex != null and pageSize == null" >
+      LIMIT #{pageBeginIndex}
+    </if>
+  </select>
+  <delete id="delete" parameterType="java.util.Map" >
+    DELETE
+    FROM `user_apply_sponsor_info`
+    <include refid="map_params_where_condition" />
+  </delete>
+  <select id="getCount" resultType="java.lang.Integer" parameterType="java.util.Map" >
+    SELECT COUNT(1)
+    FROM `user_apply_sponsor_info`
+    <include refid="map_params_where_condition" />
+  </select>
+</mapper>

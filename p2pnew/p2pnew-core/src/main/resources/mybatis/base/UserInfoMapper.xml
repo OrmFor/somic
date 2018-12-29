@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yinmimoney.web.p2pnew.dao.UserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.yinmimoney.web.p2pnew.pojo.UserInfo" extends="associationMap">
+	<id column="id" property="id" />
+	<result column="user_code" property="userCode" />
+	<result column="apply_no" property="applyNo" />
+	<result column="mobile_phone" property="mobilePhone" />
+	<result column="household_province" property="householdProvince" />
+	<result column="household_city" property="householdCity" />
+	<result column="household_area" property="householdArea" />
+	<result column="id_card_expiry_date_begin" property="idCardExpiryDateBegin" />
+	<result column="id_card_expiry_date_end" property="idCardExpiryDateEnd" />
+	<result column="address" property="address" />
+	<result column="photo" property="photo" />
+	<result column="video" property="video" />
+	<result column="credit" property="credit" />
+	<result column="credit_photo" property="creditPhoto" />
+	<result column="court" property="court" />
+	<result column="add_time" property="addTime" />
+	<result column="update_time" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+		`id`
+		,`user_code`
+		,`apply_no`
+		,`mobile_phone`
+		,`household_province`
+		,`household_city`
+		,`household_area`
+		,`id_card_expiry_date_begin`
+		,`id_card_expiry_date_end`
+		,`address`
+		,`photo`
+		,`video`
+		,`credit`
+		,`credit_photo`
+		,`court`
+		,`add_time`
+		,`update_time`
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    SELECT 
+    <include refid="Base_Column_List" />
+    FROM `user_info`
+    WHERE `id` = #{id}
+  </select>
+  <select id="getByCondition" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    SELECT 
+    <include refid="Base_Column_List" />
+    FROM `user_info`
+    <include refid="map_params_where_condition" />
+    <if test="orderBy == null" >
+      ORDER BY `id` DESC
+    </if>
+    <if test="orderBy != null and orderBy != 'no'" >
+      ORDER BY ${orderBy}
+    </if>
+	LIMIT 1
+  </select>
+  <select id="aggregate" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT ${aggregate_sql} FROM `user_info`
+    <include refid="map_params_where_condition" />
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    DELETE FROM `user_info`
+    WHERE `id` = #{id}
+  </delete>
+  <insert id="insert" parameterType="com.yinmimoney.web.p2pnew.pojo.UserInfo" >
+    INSERT INTO `user_info` (
+	  `id`
+	  ,`user_code`
+	  ,`apply_no`
+	  ,`mobile_phone`
+	  ,`household_province`
+	  ,`household_city`
+	  ,`household_area`
+	  ,`id_card_expiry_date_begin`
+	  ,`id_card_expiry_date_end`
+	  ,`address`
+	  ,`photo`
+	  ,`video`
+	  ,`credit`
+	  ,`credit_photo`
+	  ,`court`
+	  ,`add_time`
+	  ,`update_time`
+      )
+    VALUES (
+		  
+		  #{id}
+		  ,
+		  #{userCode}
+		  ,
+		  #{applyNo}
+		  ,
+		  #{mobilePhone}
+		  ,
+		  #{householdProvince}
+		  ,
+		  #{householdCity}
+		  ,
+		  #{householdArea}
+		  ,
+		  <if test="idCardExpiryDateBegin != null" >
+			#{idCardExpiryDateBegin}
+      </if>
+      <if test="idCardExpiryDateBegin == null" >
+      NOW()
+		  </if>
+		  ,
+		  <if test="idCardExpiryDateEnd != null" >
+			#{idCardExpiryDateEnd}
+      </if>
+      <if test="idCardExpiryDateEnd == null" >
+      NOW()
+		  </if>
+		  ,
+		  #{address}
+		  ,
+		  #{photo}
+		  ,
+		  #{video}
+		  ,
+		  #{credit}
+		  ,
+		  #{creditPhoto}
+		  ,
+		  #{court}
+		  ,
+		  <if test="addTime != null" >
+			#{addTime}
+      </if>
+      <if test="addTime == null" >
+      NOW()
+		  </if>
+		  ,
+		  #{updateTime}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yinmimoney.web.p2pnew.pojo.UserInfo" >
+    INSERT INTO `user_info`
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+		  <if test="id != null" >
+			`id`,
+		  </if>
+		  <if test="userCode != null" >
+			`user_code`,
+		  </if>
+		  <if test="applyNo != null" >
+			`apply_no`,
+		  </if>
+		  <if test="mobilePhone != null" >
+			`mobile_phone`,
+		  </if>
+		  <if test="householdProvince != null" >
+			`household_province`,
+		  </if>
+		  <if test="householdCity != null" >
+			`household_city`,
+		  </if>
+		  <if test="householdArea != null" >
+			`household_area`,
+		  </if>
+			`id_card_expiry_date_begin`,
+			`id_card_expiry_date_end`,
+		  <if test="address != null" >
+			`address`,
+		  </if>
+		  <if test="photo != null" >
+			`photo`,
+		  </if>
+		  <if test="video != null" >
+			`video`,
+		  </if>
+		  <if test="credit != null" >
+			`credit`,
+		  </if>
+		  <if test="creditPhoto != null" >
+			`credit_photo`,
+		  </if>
+		  <if test="court != null" >
+			`court`,
+		  </if>
+			`add_time`,
+		  <if test="updateTime != null" >
+			`update_time`,
+		  </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+		  <if test="id != null" >
+			#{id},
+		  </if>
+		  <if test="userCode != null" >
+			#{userCode},
+		  </if>
+		  <if test="applyNo != null" >
+			#{applyNo},
+		  </if>
+		  <if test="mobilePhone != null" >
+			#{mobilePhone},
+		  </if>
+		  <if test="householdProvince != null" >
+			#{householdProvince},
+		  </if>
+		  <if test="householdCity != null" >
+			#{householdCity},
+		  </if>
+		  <if test="householdArea != null" >
+			#{householdArea},
+		  </if>
+		  <if test="idCardExpiryDateBegin != null" >
+			#{idCardExpiryDateBegin},
+      </if>
+      <if test="idCardExpiryDateBegin == null" >
+      NOW(),
+		  </if>
+		  <if test="idCardExpiryDateEnd != null" >
+			#{idCardExpiryDateEnd},
+      </if>
+      <if test="idCardExpiryDateEnd == null" >
+      NOW(),
+		  </if>
+		  <if test="address != null" >
+			#{address},
+		  </if>
+		  <if test="photo != null" >
+			#{photo},
+		  </if>
+		  <if test="video != null" >
+			#{video},
+		  </if>
+		  <if test="credit != null" >
+			#{credit},
+		  </if>
+		  <if test="creditPhoto != null" >
+			#{creditPhoto},
+		  </if>
+		  <if test="court != null" >
+			#{court},
+		  </if>
+		  <if test="addTime != null" >
+			#{addTime},
+      </if>
+      <if test="addTime == null" >
+      NOW(),
+		  </if>
+		  <if test="updateTime != null" >
+			#{updateTime},
+		  </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yinmimoney.web.p2pnew.pojo.UserInfo" >
+    UPDATE `user_info`
+    <set >
+	  <if test="id != null" >
+        `id` = #{id},
+      </if>
+	  <if test="userCode != null" >
+        `user_code` = #{userCode},
+      </if>
+	  <if test="applyNo != null" >
+        `apply_no` = #{applyNo},
+      </if>
+	  <if test="mobilePhone != null" >
+        `mobile_phone` = #{mobilePhone},
+      </if>
+	  <if test="householdProvince != null" >
+        `household_province` = #{householdProvince},
+      </if>
+	  <if test="householdCity != null" >
+        `household_city` = #{householdCity},
+      </if>
+	  <if test="householdArea != null" >
+        `household_area` = #{householdArea},
+      </if>
+	  <if test="idCardExpiryDateBegin != null" >
+        `id_card_expiry_date_begin` = #{idCardExpiryDateBegin},
+      </if>
+	  <if test="idCardExpiryDateEnd != null" >
+        `id_card_expiry_date_end` = #{idCardExpiryDateEnd},
+      </if>
+	  <if test="address != null" >
+        `address` = #{address},
+      </if>
+	  <if test="photo != null" >
+        `photo` = #{photo},
+      </if>
+	  <if test="video != null" >
+        `video` = #{video},
+      </if>
+	  <if test="credit != null" >
+        `credit` = #{credit},
+      </if>
+	  <if test="creditPhoto != null" >
+        `credit_photo` = #{creditPhoto},
+      </if>
+	  <if test="court != null" >
+        `court` = #{court},
+      </if>
+	  <if test="addTime != null" >
+        `add_time` = #{addTime},
+      </if>
+	  <if test="updateTime != null" >
+        `update_time` = #{updateTime},
+      </if>
+    </set>
+    WHERE `id` = #{id}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yinmimoney.web.p2pnew.pojo.UserInfo" >
+	UPDATE `user_info` SET
+        `id` = #{id},
+        `user_code` = #{userCode},
+        `apply_no` = #{applyNo},
+        `mobile_phone` = #{mobilePhone},
+        `household_province` = #{householdProvince},
+        `household_city` = #{householdCity},
+        `household_area` = #{householdArea},
+        `id_card_expiry_date_begin` = #{idCardExpiryDateBegin},
+        `id_card_expiry_date_end` = #{idCardExpiryDateEnd},
+        `address` = #{address},
+        `photo` = #{photo},
+        `video` = #{video},
+        `credit` = #{credit},
+        `credit_photo` = #{creditPhoto},
+        `court` = #{court},
+        `add_time` = #{addTime},
+        `update_time` = #{updateTime}
+    WHERE `id` = #{id}
+  </update>
+  <update id="updateByCondition" parameterType="java.util.Map" >
+    UPDATE `user_info`
+    <set>
+	  <if test="entity.id != null" >
+        `id` = #{entity.id},
+      </if>
+	  <if test="entity.userCode != null" >
+        `user_code` = #{entity.userCode},
+      </if>
+	  <if test="entity.applyNo != null" >
+        `apply_no` = #{entity.applyNo},
+      </if>
+	  <if test="entity.mobilePhone != null" >
+        `mobile_phone` = #{entity.mobilePhone},
+      </if>
+	  <if test="entity.householdProvince != null" >
+        `household_province` = #{entity.householdProvince},
+      </if>
+	  <if test="entity.householdCity != null" >
+        `household_city` = #{entity.householdCity},
+      </if>
+	  <if test="entity.householdArea != null" >
+        `household_area` = #{entity.householdArea},
+      </if>
+	  <if test="entity.idCardExpiryDateBegin != null" >
+        `id_card_expiry_date_begin` = #{entity.idCardExpiryDateBegin},
+      </if>
+	  <if test="entity.idCardExpiryDateEnd != null" >
+        `id_card_expiry_date_end` = #{entity.idCardExpiryDateEnd},
+      </if>
+	  <if test="entity.address != null" >
+        `address` = #{entity.address},
+      </if>
+	  <if test="entity.photo != null" >
+        `photo` = #{entity.photo},
+      </if>
+	  <if test="entity.video != null" >
+        `video` = #{entity.video},
+      </if>
+	  <if test="entity.credit != null" >
+        `credit` = #{entity.credit},
+      </if>
+	  <if test="entity.creditPhoto != null" >
+        `credit_photo` = #{entity.creditPhoto},
+      </if>
+	  <if test="entity.court != null" >
+        `court` = #{entity.court},
+      </if>
+	  <if test="entity.addTime != null" >
+        `add_time` = #{entity.addTime},
+      </if>
+	  <if test="entity.updateTime != null" >
+        `update_time` = #{entity.updateTime},
+      </if>
+      <foreach collection="entity.nullColums" item="nullColum">
+        `${nullColum}` = NULL,
+      </foreach>
+    </set>
+    <include refid="map_params_where_condition" />
+  </update>
+  <update id="updateIncreateNumbers" parameterType="java.util.Map" >
+    UPDATE `user_info`
+    <set>
+      <foreach collection="increateNumbers" item="numberCloums">
+        `${numberCloums.column}` = `${numberCloums.column}` + #{numberCloums.number},
+      </foreach>
+    </set>
+    <include refid="map_params_where_condition" />
+  </update>
+  <sql id="map_params_where_condition" >
+    <trim prefix="WHERE" prefixOverrides="AND">
+	  <if test="id != null" >
+        AND `id` = #{id}
+	  </if>
+	  <if test="userCode != null" >
+        AND `user_code` = #{userCode}
+	  </if>
+	  <if test="applyNo != null" >
+        AND `apply_no` = #{applyNo}
+	  </if>
+	  <if test="mobilePhone != null" >
+        AND `mobile_phone` = #{mobilePhone}
+	  </if>
+	  <if test="householdProvince != null" >
+        AND `household_province` = #{householdProvince}
+	  </if>
+	  <if test="householdCity != null" >
+        AND `household_city` = #{householdCity}
+	  </if>
+	  <if test="householdArea != null" >
+        AND `household_area` = #{householdArea}
+	  </if>
+	  <if test="idCardExpiryDateBegin != null" >
+        AND `id_card_expiry_date_begin` = #{idCardExpiryDateBegin}
+	  </if>
+	  <if test="idCardExpiryDateEnd != null" >
+        AND `id_card_expiry_date_end` = #{idCardExpiryDateEnd}
+	  </if>
+	  <if test="address != null" >
+        AND `address` = #{address}
+	  </if>
+	  <if test="photo != null" >
+        AND `photo` = #{photo}
+	  </if>
+	  <if test="video != null" >
+        AND `video` = #{video}
+	  </if>
+	  <if test="credit != null" >
+        AND `credit` = #{credit}
+	  </if>
+	  <if test="creditPhoto != null" >
+        AND `credit_photo` = #{creditPhoto}
+	  </if>
+	  <if test="court != null" >
+        AND `court` = #{court}
+	  </if>
+	  <if test="addTime != null" >
+        AND `add_time` = #{addTime}
+	  </if>
+	  <if test="updateTime != null" >
+        AND `update_time` = #{updateTime}
+	  </if>
+	  <if test="condition != null">
+	  <if test="condition.id != null" >
+        AND `id` = #{condition.id}
+	  </if>
+	  <if test="condition.userCode != null" >
+        AND `user_code` = #{condition.userCode}
+	  </if>
+	  <if test="condition.applyNo != null" >
+        AND `apply_no` = #{condition.applyNo}
+	  </if>
+	  <if test="condition.mobilePhone != null" >
+        AND `mobile_phone` = #{condition.mobilePhone}
+	  </if>
+	  <if test="condition.householdProvince != null" >
+        AND `household_province` = #{condition.householdProvince}
+	  </if>
+	  <if test="condition.householdCity != null" >
+        AND `household_city` = #{condition.householdCity}
+	  </if>
+	  <if test="condition.householdArea != null" >
+        AND `household_area` = #{condition.householdArea}
+	  </if>
+	  <if test="condition.idCardExpiryDateBegin != null" >
+        AND `id_card_expiry_date_begin` = #{condition.idCardExpiryDateBegin}
+	  </if>
+	  <if test="condition.idCardExpiryDateEnd != null" >
+        AND `id_card_expiry_date_end` = #{condition.idCardExpiryDateEnd}
+	  </if>
+	  <if test="condition.address != null" >
+        AND `address` = #{condition.address}
+	  </if>
+	  <if test="condition.photo != null" >
+        AND `photo` = #{condition.photo}
+	  </if>
+	  <if test="condition.video != null" >
+        AND `video` = #{condition.video}
+	  </if>
+	  <if test="condition.credit != null" >
+        AND `credit` = #{condition.credit}
+	  </if>
+	  <if test="condition.creditPhoto != null" >
+        AND `credit_photo` = #{condition.creditPhoto}
+	  </if>
+	  <if test="condition.court != null" >
+        AND `court` = #{condition.court}
+	  </if>
+	  <if test="condition.addTime != null" >
+        AND `add_time` = #{condition.addTime}
+	  </if>
+	  <if test="condition.updateTime != null" >
+        AND `update_time` = #{condition.updateTime}
+	  </if>
+	  </if>
+	  <if test="vo != null and !vo.expressionChainList.empty">
+        AND
+        <foreach collection="vo.expressionChainList" item="expressionChain" separator="OR">
+          <if test="!expressionChain.expressionList.empty">
+            <foreach collection="expressionChain.expressionList" item="expression" separator="AND">
+              <choose>
+                <when test="expression.type == 0">
+                  `${expression.column}` ${expression.operator}
+                </when>
+                <when test="expression.type == 1">
+                  `${expression.column}` ${expression.operator} #{expression.value}
+                </when>
+                <when test="expression.type == 2">
+                  `${expression.column}` ${expression.operator} #{expression.value} AND #{expression.value1}
+                </when>
+                <when test="expression.type == 3">
+                  `${expression.column}` ${expression.operator}
+                  <foreach collection="expression.values" item="value" open="(" separator="," close=")">
+                    #{value}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </if>
+        </foreach>
+      </if>
+      <if test="expressionChainList != null and !expressionChainList.empty">
+        AND
+        <foreach collection="expressionChainList" item="expressionChain" separator="OR">
+          <if test="!expressionChain.expressionList.empty">
+            <foreach collection="expressionChain.expressionList" item="expression" separator="AND">
+              <choose>
+                <when test="expression.type == 0">
+                  `${expression.column}` ${expression.operator}
+                </when>
+                <when test="expression.type == 1">
+                  `${expression.column}` ${expression.operator} #{expression.value}
+                </when>
+                <when test="expression.type == 2">
+                  `${expression.column}` ${expression.operator} #{expression.value} AND #{expression.value1}
+                </when>
+                <when test="expression.type == 3">
+                  `${expression.column}` ${expression.operator}
+                  <foreach collection="expression.values" item="value" open="(" separator="," close=")">
+                    #{value}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </if>
+        </foreach>
+      </if>
+      <include refid="map_params_where_condition_ext" />
+    </trim>
+  </sql>
+  <select id="getList" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM `user_info`
+    <include refid="map_params_where_condition" />
+    <if test="orderBy == null" >
+      ORDER BY `id` DESC
+    </if>
+    <if test="orderBy != null and orderBy != 'no'" >
+      ORDER BY ${orderBy}
+    </if>
+    <if test="pageBeginIndex != null and pageSize != null" >
+      LIMIT #{pageBeginIndex},#{pageSize}
+    </if>
+    <if test="pageBeginIndex == null and pageSize != null" >
+      LIMIT #{pageSize}
+    </if>
+    <if test="pageBeginIndex != null and pageSize == null" >
+      LIMIT #{pageBeginIndex}
+    </if>
+  </select>
+  <delete id="delete" parameterType="java.util.Map" >
+    DELETE
+    FROM `user_info`
+    <include refid="map_params_where_condition" />
+  </delete>
+  <select id="getCount" resultType="java.lang.Integer" parameterType="java.util.Map" >
+    SELECT COUNT(1)
+    FROM `user_info`
+    <include refid="map_params_where_condition" />
+  </select>
+</mapper>
