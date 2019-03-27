@@ -2,8 +2,10 @@
   
   
   
-  <bean id="dataSourceAdvice" class="cc.s2m.web.utils.webUtils.dataSource.DataSourceAdvice"></bean>
-	<bean name="dataSourceSwitcher" class="org.springframework.aop.support.JdkRegexpMethodPointcut" scope="prototype">
+  <bean id="dataSourceAdvice" 
+  class="cc.s2m.web.utils.webUtils.dataSource.DataSourceAdvice"></bean>
+	<bean name="dataSourceSwitcher" 
+	class="org.springframework.aop.support.JdkRegexpMethodPointcut" scope="prototype">
 		<property name="patterns">
 			<list>
 				<value>com.yinmimoney.web.p2pnew.service.*</value>
